@@ -1,29 +1,28 @@
-'use client';
+'use client'
 
-import { useFormState } from 'react-dom';
-import { CustomerField, InvoiceForm } from '@/app/lib/definitions';
+import { useFormState } from 'react-dom'
+import { CustomerField, InvoiceForm } from '@/app/lib/definitions'
 import {
   CheckIcon,
   ClockIcon,
   CurrencyDollarIcon,
   UserCircleIcon,
-} from '@heroicons/react/24/outline';
-import Link from 'next/link';
-import { Button } from '@/app/ui/button';
-import { updateInvoice } from '@/app/lib/actions';
-
+} from '@heroicons/react/24/outline'
+import Link from 'next/link'
+import { Button } from '@/app/ui/button'
+import { updateInvoice } from '@/app/lib/actions'
 
 export default function EditInvoiceForm({
   invoice,
   customers,
 }: {
-  invoice: InvoiceForm;
-  customers: CustomerField[];
+  invoice: InvoiceForm
+  customers: CustomerField[]
 }) {
-  const initialState = { message: null, errors: {} };
-  const updateInvoiceWithId = updateInvoice.bind(null, invoice.id);
-  const [state, dispatch] = useFormState(updateInvoiceWithId, initialState);
- 
+  const initialState = { message: null, errors: {} }
+  const updateInvoiceWithId = updateInvoice.bind(null, invoice.id)
+  const [state, dispatch] = useFormState(updateInvoiceWithId, initialState)
+
   return (
     <form action={dispatch}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
@@ -34,7 +33,7 @@ export default function EditInvoiceForm({
           </label>
           <div className="relative">
             <select
-              aria-describedby='customer-error'
+              aria-describedby="customer-error"
               id="customer"
               name="customerId"
               className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
@@ -69,7 +68,7 @@ export default function EditInvoiceForm({
           <div className="relative mt-2 rounded-md">
             <div className="relative">
               <input
-                aria-describedby='amount-error'
+                aria-describedby="amount-error"
                 id="amount"
                 name="amount"
                 type="number"
@@ -87,8 +86,7 @@ export default function EditInvoiceForm({
                 <p className="mt-2 text-sm text-red-500" key={error}>
                   {error}
                 </p>
-              ))
-              }
+              ))}
           </div>
         </div>
 
@@ -101,7 +99,7 @@ export default function EditInvoiceForm({
             <div className="flex gap-4">
               <div className="flex items-center">
                 <input
-                  aria-describedby='status-error'
+                  aria-describedby="status-error"
                   id="pending"
                   name="status"
                   type="radio"
@@ -141,11 +139,11 @@ export default function EditInvoiceForm({
                   {error}
                 </p>
               ))}
-            {state?.message &&
-                <p className="mt-2 text-sm text-red-500" key={state.message}>
-                  {state.message}
-                </p>
-            }
+            {state?.message && (
+              <p className="mt-2 text-sm text-red-500" key={state.message}>
+                {state.message}
+              </p>
+            )}
           </div>
         </fieldset>
       </div>
@@ -159,5 +157,5 @@ export default function EditInvoiceForm({
         <Button type="submit">Edit Invoice</Button>
       </div>
     </form>
-  );
+  )
 }
